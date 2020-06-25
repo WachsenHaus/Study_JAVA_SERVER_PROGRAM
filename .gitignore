@@ -1,2 +1,4 @@
 Servers
-./*/WebContent/Images
+*/WebContent/Images
+*/.settings
+.metadata
