@@ -37,3 +37,55 @@ Object.defineProperty(foo, "name", {
     this._name = value;
   },
 });
+
+function Car() {
+  this.wheel = 4;
+  this.beep = "beep";
+}
+Car.prototype.go = function () {
+  console.log("출발");
+};
+
+function Person(name, blog) {
+  this.name = name;
+  this.blog = blog;
+}
+Person.prototype.getName = function () {
+  return this.name;
+};
+Person.prototype.getBlog = function () {
+  return this.blog;
+};
+
+var unikys = new Person("unikys", "unikys.tistory.com");
+var prop;
+
+for (prop in unikys) {
+  console.log("unikys[" + prop + "] = " + unikys[prop]);
+}
+
+function Person(name, blog) {
+  this.name = name;
+  this.blog = blog;
+  this.getName = function () {
+    return this.name;
+  };
+  this.getBlog = function () {
+    return this.blog;
+  };
+}
+
+class Phone {
+  kind = "smart";
+  constructor() {
+    this.name = "Polygon";
+  }
+}
+var test = new Phone();
+
+Person.prototype.getName = function () {
+  return this.name;
+};
+Person.prototype.getBlog = function () {
+  return this.blog;
+};
