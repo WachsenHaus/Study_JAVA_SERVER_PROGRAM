@@ -38,7 +38,7 @@
 						<li>
 							<%=tmp.getRegdate()%>
 						</li>
-						<a class="button--delete">삭제</a>
+						<a class="button delete">삭제</a>
 				</ul>
 			<%} %>
 		</form>
