@@ -20,33 +20,23 @@ public class TodoDao {
 		return dao;
 	}
 	
-	public boolean insert(String content) {
-		boolean result = false;
+	public boolean update()
+	{
+		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		try {
 			conn = new DbcpBean().getConn();
-			String sql="insert into todo "
-					+ "values(memo_seq.nextval,'" + content + "',sysdate)"; 
-			
+			String sql="";
 			pstmt = conn.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				TodoDto dto = new TodoDto();
-				dto.setNum(rs.getInt("num"));
-				dto.setWork(rs.getString("work"));
-				dto.setRegdate(rs.getString("regdate"));
-			}
-			result = true;
+			result = pstmt.executeUpdate();
 		}
 		catch(Exception e) {
-			result = false;
+			result = 0;
 			e.printStackTrace();
 		}
 		finally {
 			try {
-				if( rs != null) rs.close();
 				if(pstmt != null) pstmt.close();
 				if(conn != null) conn.close();
 			}
@@ -54,13 +44,48 @@ public class TodoDao {
 				e.printStackTrace();
 			}
 		}
-		
-		return result;
+		if(result>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
+	public boolean  insert(String content) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql="insert into todo "
+					+ "values(memo_seq.nextval,'" + content + "',sysdate)"; 
+			
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+		}
+		catch(Exception e) {
+			result = 0;
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(result>0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	public boolean delete(int num) {
-		boolean result = false;
-		System.out.println(num);
+		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -68,14 +93,10 @@ public class TodoDao {
 			String sql="delete from todo where num = "
 					+ num; 
 			pstmt = conn.prepareStatement(sql);
-			if(pstmt.executeUpdate() != 0)
-			{
-				result = true;
-			}
-			System.out.println("삭제완료!");
+			result = pstmt.executeUpdate();
 		}
 		catch(Exception e) {
-			result = false;
+			result = 0;
 			e.printStackTrace();
 		}
 		finally {
@@ -87,8 +108,11 @@ public class TodoDao {
 				e.printStackTrace();
 			}
 		}
-		
-		return result;
+		if(result>0) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	//회원목록을 리턴해주는 메소드
@@ -99,7 +123,7 @@ public class TodoDao {
 		ResultSet rs = null;
 		try {
 			conn = new DbcpBean().getConn();
-			String sql="SELECT num,work,TO_CHAR(regdate, 'YY\" 년 \"MM\" 월 \"DD\" 일 \"') as regdate" 
+			String sql="SELECT num,work,TO_CHAR(regdate, 'YY\"년\"MM\"월\"DD\"일\"HH24\"시\"MI\"분\"') as regdate" 
 					+ " FROM todo"
 					+ " ORDER BY num ASC";
 			pstmt = conn.prepareStatement(sql);

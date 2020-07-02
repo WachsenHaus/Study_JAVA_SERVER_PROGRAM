@@ -10,7 +10,6 @@
 	TodoDao dao = TodoDao.getInstance();
 	dao.delete(Integer.parseInt(sNum));
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
