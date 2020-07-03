@@ -13,6 +13,7 @@ boolean isSucc = false;
 if(dao.insert(dto))
 {
 	isSucc = true;
+	//푸드 테이블을 생성해야함. 해당 아이디 _food로 
 }
 %>
 <!DOCTYPE html>

@@ -13,6 +13,14 @@ public class UsersDao {
 	private String SQL_DELETE = "";
 	private String SQL_UPDATE = "";
 
+	private String ID = "";
+	
+	public void setId(String id) {
+		this.ID = id;
+	}
+	public String getId() {
+		return this.ID;
+	}
 	private static UsersDao dao = null;
 	
 	private UsersDao() {}

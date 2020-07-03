@@ -15,11 +15,13 @@ UsersDto dto = dao.select(id);
 boolean isSucc = false;
 if(dto != null)
 {
-	System.out.println("아이디!");
-	System.out.println(dto.getId());
-	if(id.equals(dto.getId()) && pwd.equals(dto.getPwd()))
+	String mId = dto.getId();
+	String mPwd = dto.getPwd();
+	if(id.equals(mId) && pwd.equals(mPwd))
 	{
 		isSucc = true;
+		//싱글톤 아이디를 정해준다.
+		dao.setId(mId);
 	}
 }
 //2. 정보가 동일하게 존재하면. 로그인을 성공시키고. 다음 페이지로 이동시킨다.
@@ -34,6 +36,7 @@ if(dto != null)
 </head>
 <body>
 <%if(isSucc){ %>
+	
 	<script>
 		location.href="../food/food.jsp";
 	</script>
