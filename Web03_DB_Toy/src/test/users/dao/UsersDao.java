@@ -3,6 +3,8 @@ package test.users.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import test.users.dto.UsersDto;
 import test.util.DbcpBean;
@@ -28,6 +30,96 @@ public class UsersDao {
 	public static UsersDao getInstance() { 
 		if(dao == null) dao = new UsersDao();
 		return dao;
+	}
+	public boolean commit() {
+		int flag = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = new DbcpBean().getConn();
+			System.out.println("커밋");
+			String sql = "commit";
+			pstmt = conn.prepareStatement(sql);
+			flag = pstmt.executeUpdate();
+			System.out.println("커밋플래그" + flag);
+		} catch (Exception e) {
+			flag = 0;
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (flag >= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public boolean delete(String id) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "delete from " + TableName
+					+ " where id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			result = 0;
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (result > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public List<UsersDto> getList(){
+		List<UsersDto> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn=new DbcpBean().getConn();
+			String sql="SELECT id,pwd"
+					+ " FROM "+ TableName;
+			pstmt=conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				UsersDto dto=new UsersDto();
+				dto.setId(rs.getString("id"));
+				dto.setPwd(rs.getString("pwd"));
+				list.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null)rs.close();
+				if(pstmt!=null)pstmt.close();
+				if(conn!=null)conn.close();
+			}catch(Exception e) {}
+		}
+		return list;
 	}
 	
 	public UsersDto select(String id)

@@ -40,6 +40,7 @@ if(dto != null)
 	<script>
 		location.href="../food/food.jsp";
 	</script>
+	
 <%}else{ %>
 	<script>
 		alert("회원아이디가없습니다...");

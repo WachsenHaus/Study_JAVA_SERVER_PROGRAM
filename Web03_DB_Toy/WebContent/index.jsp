@@ -15,6 +15,7 @@
 		<input type="password" id="pwd" name="pwd" />
 		<button type="submit">로그인</button>
 		<a href="login/signup.jsp">회원가입하러가기</a>
+		<a href="admin/adminPage.jsp">관리자모드(회원탈퇴)</a>
 	</form>
 </body>
 </html>
