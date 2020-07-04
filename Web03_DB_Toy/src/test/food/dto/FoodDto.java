@@ -6,13 +6,13 @@ public class FoodDto {
 	private String name;
 	private String addr;
 	private String menu;
-	private int price;
-	private int grade;
+	private double price;
+	private double grade;
 	private String content;
 	
 	public FoodDto() {}
 	
-	public FoodDto(int num, String name, String addr, String menu, int price, int grade, String content) {
+	public FoodDto(int num, String name, String addr, String menu, double price, double grade, String content) {
 		super();
 		this.num = num;
 		this.name = name;
@@ -46,16 +46,16 @@ public class FoodDto {
 	public void setMenu(String menu) {
 		this.menu = menu;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
-	public int getGrade() {
+	public double getGrade() {
 		return grade;
 	}
-	public void setGrade(int grade) {
+	public void setGrade(double grade) {
 		this.grade = grade;
 	}
 	public String getContent() {

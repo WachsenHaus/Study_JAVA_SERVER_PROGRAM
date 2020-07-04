@@ -21,7 +21,8 @@ if(dto != null)
 	{
 		isSucc = true;
 		//싱글톤 아이디를 정해준다.
-		dao.setId(mId);
+		System.out.println("아이디셋팅" + id);
+		dao.setId(id);
 	}
 }
 //2. 정보가 동일하게 존재하면. 로그인을 성공시키고. 다음 페이지로 이동시킨다.

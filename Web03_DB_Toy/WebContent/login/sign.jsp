@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
     
 <%
+request.setCharacterEncoding("utf-8");
 UsersDao dao = UsersDao.getInstance();
 String id = request.getParameter("id");
 String pwd = request.getParameter("pwd");
