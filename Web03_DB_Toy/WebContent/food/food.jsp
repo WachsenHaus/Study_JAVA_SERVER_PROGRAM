@@ -59,47 +59,57 @@ if(getClickCard != null){
           </a>
         </div>
       </div>
+      <!-- 모달을 선택했다면 모달을 바로 보여줌. -->
       <%if(isModdal){ %>
-        <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close">x</span>
-          <div class="container">
-            <div class="container__inner">
-              <form action="addInfo.jsp" method="post">
-                <div class="container__inner__row">
-                  <label for="name">식당이름</label>
-                  <input required type="text" name="name" id="name" value="<%=name%>"/>
-                </div>
-                <div class="container__inner__row">
-                  <label for="addr">주소</label>
-                  <input required  type="text" name="addr" id="addr" value="<%=addr%>" />
-                </div>
-                <div class="container__inner__row">
-                  <label for="menu">음식이름</label>
-                  <input required type="text" name="menu" id="menu" value="<%=menu%>"/>
-                </div>
-                <div class="container__inner__row">
-                  <label for="price">가격</label>
-                  <input required type="number" name="price" id="price" value="<%=price%>" />
-                </div>
-                <div class="container__inner__row">
-                  <label for="grade">평점</label>
-                  <input required type="text" name="grade" id="grade" value="<%=grade%>" />
-                </div>
-                <div class="container__inner__row">
-                  <label for="content">내용</label>
-                  <textarea required name="content" id="content" cols="30" rows="10" value="<%=content %>"></textarea>
-                </div>
-                <div class="container__inner__row btn">
-                  <button class="sendBtn" type="submit">
-                    기록 추가하기
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% { System.out.println(isModdal);%>
+    	   <div id="clickModal" class="pickModal">
+	        <div class="modal-content">
+	          <span class="clickClose">x</span>
+	          <div class="container">
+	            <div class="container__inner">
+	              <form action="modifyInfo.jsp" method="post">
+	              	<input type="hidden" name="num" value="<%=pickNum %>"/>
+	                <div class="container__inner__row">
+	                  <label for="name">식당이름</label>
+	                  <input required type="text" name="name" id="name" value="<%=name%>"/>
+	                </div>
+	                <div class="container__inner__row">
+	                  <label for="addr">주소</label>
+	                  <input required  type="text" name="addr" id="addr" value="<%=addr%>" />
+	                </div>
+	                <div class="container__inner__row">
+	                  <label for="menu">음식이름</label>
+	                  <input required type="text" name="menu" id="menu" value="<%=menu%>"/>
+	                </div>
+	                <div class="container__inner__row">
+	                  <label for="price">가격</label>
+	                  <input required type="number" name="price" id="price" value="<%=price%>" />
+	                </div>
+	                <div class="container__inner__row">
+	                  <label for="grade">평점</label>
+	                  <input required type="text" name="grade" id="grade" value="<%=grade%>" />
+	                </div>
+	                <div class="container__inner__row">
+	                  <label for="content">내용</label>
+	                  <textarea required name="content" id="content" cols="30" rows="10"><%=content %></textarea>
+	                </div>
+	                
+	                <div class="container__inner__row btn">
+	                  <button class="sendBtn" type="submit">
+	                    수정하기
+	                  </button>
+         	          <button class="sendBtn" type="reset">
+	                    취소하기
+	                  </button>
+	                  <a href="delete.jsp?num=<%=pickNum%>"><i class="fas fa-trash-alt"></i></a>
+	                </div>
+	                
+	              </form>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	      <%} %>
       <%} %>
 
       <div id="myModal" class="modal">
@@ -142,7 +152,7 @@ if(getClickCard != null){
           </div>
         </div>
       </div>
-      <h1><%=pickNum %></h1>
+      
       <form id="cardSend" action="food.jsp" method="post">
      	<input id="selectedCard" type="hidden" name="Num" value=""/>
      </form>
@@ -150,7 +160,7 @@ if(getClickCard != null){
         <%if(isSucc) {%> 
 	          <%for(FoodDto tmp : list){ %>
 	      		<article class="foodBox">
-              <h1 id="num"><%=tmp.getNum() %></h1>
+              		<h1 id="num"><%=tmp.getNum() %></h1>
 	      			<h1 class="menu" ><%=tmp.getMenu() %></h1>
 	      			<h1 class="price"><%=tmp.getPrice() %></h1>
 	      			<h1 class="grade"><%=tmp.getGrade() %></h1>
@@ -179,35 +189,39 @@ if(getClickCard != null){
           else if (btn.className === "foodBox"){
             getNum = btn.childNodes[1].innerHTML;
           }
-          document.getElementById("selectedCard").value = getNum;
-          document.querySelector("#cardSend").submit();
+          location.replace("food.jsp?Num="+getNum);
+          //document.getElementById("selectedCard").value = getNum;
+          //document.querySelector("#cardSend").submit();
         }
         foodModal();
-        // Get the modal
-        var modal = document.getElementById("myModal");
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+        const clickModal = document.getElementById("clickModal");
+        if(clickModal){
+            const clickSpan = document.getElementsByClassName("clickClose")[0];
+            clickSpan.onclick = function () {
+              clickModal.style.display = "none";
+            }
+        }
 
-        // When the user clicks on the button, open the modal
+        const modal = document.getElementById("myModal");
+        const btn = document.getElementById("myBtn");
+        const span = document.getElementsByClassName("close")[0];
+        
         btn.onclick = function () {
           modal.style.display = "block";
         };
-
-        // When the user clicks on <span> (x), close the modal
         span.onclick = function () {
           modal.style.display = "none";
         };
-
-        // When the user clicks anywhere outside of the modal, close it
+        
         window.onclick = function (event) {
-          if (event.target == modal) {
+          if (event.target == modal || event.target == clickModal) {
             modal.style.display = "none";
+            clickModal.style.display = "none";
           }
         };
+
       </script>
     </body>
   </html>

@@ -19,6 +19,79 @@ public class FoodDao {
 	private String tableName;
 	private String seqName;
 	
+	public boolean delete(int num)
+	{
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "delete from " + tableName
+					+ " where num = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			result = 0;
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (result > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	public boolean update(FoodDto dto) {
+		int flag = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql="update " + tableName
+					+ " set name=?, addr=?, menu=?, price=?, grade=?, content=? "
+					+ " where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getName());
+			pstmt.setString(2, dto.getAddr());
+			pstmt.setString(3, dto.getMenu());
+			pstmt.setDouble(4, dto.getPrice());
+			pstmt.setDouble(5, dto.getGrade());
+			pstmt.setString(6, dto.getContent());
+			pstmt.setInt(7, dto.getNum());
+			flag = pstmt.executeUpdate();
+		}
+		catch(Exception e) {
+			flag = 0;
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(flag>0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
 	
 	public static FoodDao getInstance() {
 		if(dao == null) dao = new FoodDao();
