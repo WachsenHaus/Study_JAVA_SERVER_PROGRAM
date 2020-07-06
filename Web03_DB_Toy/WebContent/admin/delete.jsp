@@ -1,15 +1,15 @@
-<%@page import="test.users.dao.UsersDao"%>
-<%@page import="test.food.dao.FoodDao"%>
+<%@page import="test.users.dao.usersdao"%>
+<%@page import="test.food.dao.fooddao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
-request.setCharacterEncoding("utf-8");
-String id = request.getParameter("id");
-UsersDao dao = UsersDao.getInstance();
-FoodDao fDao = FoodDao.getInstance();
-boolean isSucc = false;
-%>
+    	request.setCharacterEncoding("utf-8");
+        String id = request.getParameter("id");
+        usersdao dao = usersdao.getInstance();
+        fooddao fDao = fooddao.getInstance();
+        boolean isSucc = false;
+    %>
     
 <!DOCTYPE html>
 <html>

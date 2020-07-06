@@ -1,20 +1,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="test.users.dto.UsersDto"%>
-<%@page import="test.users.dao.UsersDao"%>
+<%@page import="test.users.dto.usersdto"%>
+<%@page import="test.users.dao.usersdao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
-request.setCharacterEncoding("utf-8");
-UsersDao dao = UsersDao.getInstance();
-List<UsersDto> list = dao.getList();
-boolean isSucc = false;
-if(list != null){
-	isSucc = true;
-}
-
-%>
+    	request.setCharacterEncoding("utf-8");
+        usersdao dao = usersdao.getInstance();
+        List<usersdto> list = dao.getList();
+        boolean isSucc = false;
+        if(list != null){
+        	isSucc = true;
+        }
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +33,12 @@ if(list != null){
 			</tr>
 		</thead>
 		<tbody>
-		<%if(isSucc) {%>
-			<%for(UsersDto tmp : list){ %>
+		<%
+			if(isSucc) {
+		%>
+			<%
+				for(usersdto tmp : list){
+			%>
 				<tr>
 					<td><%=tmp.getId() %></td>
 					<td><%=tmp.getPwd() %></td>

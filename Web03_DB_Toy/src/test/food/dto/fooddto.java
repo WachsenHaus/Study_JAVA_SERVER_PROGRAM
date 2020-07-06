@@ -1,6 +1,6 @@
 package test.food.dto;
 
-public class FoodDto {
+public class fooddto {
 
 	private int num;
 	private String name;
@@ -10,9 +10,9 @@ public class FoodDto {
 	private double grade;
 	private String content;
 	
-	public FoodDto() {}
+	public fooddto() {}
 	
-	public FoodDto(int num, String name, String addr, String menu, double price, double grade, String content) {
+	public fooddto(int num, String name, String addr, String menu, double price, double grade, String content) {
 		super();
 		this.num = num;
 		this.name = name;

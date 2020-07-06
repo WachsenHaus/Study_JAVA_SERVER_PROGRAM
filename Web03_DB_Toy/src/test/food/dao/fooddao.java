@@ -6,14 +6,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.food.dto.FoodDto;
-import test.users.dto.UsersDto;
+import test.food.dto.fooddto;
+import test.users.dto.usersdto;
 import test.util.DbcpBean;
 
-public class FoodDao {
+public class fooddao {
 
-	private static FoodDao dao = null;
-	private FoodDao() {}
+	private static fooddao dao = null;
+	private fooddao() {}
 	
 	private String id = "";
 	private String tableName;
@@ -52,7 +52,7 @@ public class FoodDao {
 	}
 	
 	
-	public boolean update(FoodDto dto) {
+	public boolean update(fooddto dto) {
 		int flag = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -93,8 +93,8 @@ public class FoodDao {
 	
 	
 	
-	public static FoodDao getInstance() {
-		if(dao == null) dao = new FoodDao();
+	public static fooddao getInstance() {
+		if(dao == null) dao = new fooddao();
 		return dao;
 	}
 	
@@ -107,8 +107,8 @@ public class FoodDao {
 	public String getId() {
 		return this.id;
 	}
-	public FoodDto select(int mid) {
-		FoodDto dto = null;
+	public fooddto select(int mid) {
+		fooddto dto = null;
 		//필요한 객체의 참조값을 담을 지역변수 만들기 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -128,7 +128,7 @@ public class FoodDao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 결과 값 추출하기 
 			if (rs.next()) {
-				dto = new FoodDto();
+				dto = new fooddto();
 				dto.setNum(rs.getInt("num"));
 				dto.setName(rs.getString("name"));
 				dto.setAddr(rs.getString("addr"));
@@ -152,8 +152,8 @@ public class FoodDao {
 		}
 		return dto;
 	}
-	public List<FoodDto> getList(){
-		List<FoodDto> list = new ArrayList<>();
+	public List<fooddto> getList(){
+		List<fooddto> list = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -164,7 +164,7 @@ public class FoodDao {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				FoodDto dto=new FoodDto();
+				fooddto dto=new fooddto();
 				dto.setNum(rs.getInt("num"));
 				dto.setName(rs.getString("name"));
 				dto.setAddr(rs.getString("addr"));
@@ -188,7 +188,7 @@ public class FoodDao {
 	}
 	
 	
-	public boolean insert(FoodDto dto) {
+	public boolean insert(fooddto dto) {
 		int flag = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

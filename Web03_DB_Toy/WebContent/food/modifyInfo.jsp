@@ -1,27 +1,28 @@
-<%@page import="test.food.dao.FoodDao"%> <%@page import="test.food.dto.FoodDto"%> <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page import="test.food.dao.fooddao"%> <%@page import="test.food.dto.fooddto"%> <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
-<% request.setCharacterEncoding("utf-8"); 
-String num = request.getParameter("num"); 
-String name = request.getParameter("name"); 
-String addr = request.getParameter("addr"); 
-String menu = request.getParameter("menu"); 
-String price = request.getParameter("price");
-String grade =request.getParameter("grade"); 
-String content = request.getParameter("content"); 
-boolean isSucc = false; 
-FoodDto dto = new FoodDto();
-dto.setNum(Integer.parseInt(num)); 
-dto.setName(name); 
-dto.setAddr(addr);
-dto.setMenu(menu);
-dto.setPrice(Double.parseDouble(price));
-dto.setGrade(Double.parseDouble(grade)); 
-dto.setContent(content);
-FoodDao dao = FoodDao.getInstance();
-if(dao.update(dto)) { 
-	isSucc = true;
-} 
-%>
+<%
+ 	request.setCharacterEncoding("utf-8"); 
+  String num = request.getParameter("num"); 
+  String name = request.getParameter("name"); 
+  String addr = request.getParameter("addr"); 
+  String menu = request.getParameter("menu"); 
+  String price = request.getParameter("price");
+  String grade =request.getParameter("grade"); 
+  String content = request.getParameter("content"); 
+  boolean isSucc = false; 
+  fooddto dto = new fooddto();
+  dto.setNum(Integer.parseInt(num)); 
+  dto.setName(name); 
+  dto.setAddr(addr);
+  dto.setMenu(menu);
+  dto.setPrice(Double.parseDouble(price));
+  dto.setGrade(Double.parseDouble(grade)); 
+  dto.setContent(content);
+  fooddao dao = fooddao.getInstance();
+  if(dao.update(dto)) { 
+  	isSucc = true;
+  }
+ %>
 
 <!DOCTYPE html>
 <html>

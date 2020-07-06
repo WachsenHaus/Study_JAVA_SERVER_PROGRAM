@@ -2,16 +2,16 @@ package test.todo.dto;
 
 public class TodoDto {
 private int num;
-private String work;
+private String content;
 private String regdate;
 
 
 public TodoDto() {
 	
 }
-public TodoDto(int nun, String work, String regdate) {
+public TodoDto(int nun, String content, String regdate) {
 	this.num = num;
-	this.work = work;
+	this.content = content;
 	this.regdate = regdate;
 }
 
@@ -23,11 +23,11 @@ public int getNum() {
 public void setNum(int num) {
 	this.num = num;
 }
-public String getWork() {
-	return work;
+public String getContent() {
+	return content;
 }
-public void setWork(String work) {
-	this.work = work;
+public void setContent(String content) {
+	this.content = content;
 }
 public String getRegdate() {
 	return regdate;

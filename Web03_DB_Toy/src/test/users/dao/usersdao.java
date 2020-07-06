@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.users.dto.UsersDto;
+import test.users.dto.usersdto;
 import test.util.DbcpBean;
 
-public class UsersDao {
+public class usersdao {
 	private String TableName = "guide_users";
 	
 	private String SQL_DELETE = "";
@@ -23,12 +23,12 @@ public class UsersDao {
 	public String getId() {
 		return this.ID;
 	}
-	private static UsersDao dao = null;
+	private static usersdao dao = null;
 	
-	private UsersDao() {}
+	private usersdao() {}
 	
-	public static UsersDao getInstance() { 
-		if(dao == null) dao = new UsersDao();
+	public static usersdao getInstance() { 
+		if(dao == null) dao = new usersdao();
 		return dao;
 	}
 	public boolean commit() {
@@ -93,8 +93,8 @@ public class UsersDao {
 		}
 	}
 	
-	public List<UsersDto> getList(){
-		List<UsersDto> list = new ArrayList<>();
+	public List<usersdto> getList(){
+		List<usersdto> list = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -105,7 +105,7 @@ public class UsersDao {
 			pstmt=conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				UsersDto dto=new UsersDto();
+				usersdto dto=new usersdto();
 				dto.setId(rs.getString("id"));
 				dto.setPwd(rs.getString("pwd"));
 				list.add(dto);
@@ -122,9 +122,9 @@ public class UsersDao {
 		return list;
 	}
 	
-	public UsersDto select(String id)
+	public usersdto select(String id)
 	{
-		UsersDto dto = null;
+		usersdto dto = null;
 		//필요한 객체의 참조값을 담을 지역변수 만들기 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -143,7 +143,7 @@ public class UsersDao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 결과 값 추출하기 
 			if (rs.next()) {
-				dto = new UsersDto();
+				dto = new usersdto();
 				dto.setId(rs.getString("id"));
 				System.out.println("아이디");
 				System.out.println(dto.getId());
@@ -167,7 +167,7 @@ public class UsersDao {
 		return dto;
 	}
 	
-	public boolean insert(UsersDto dto) {
+	public boolean insert(usersdto dto) {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

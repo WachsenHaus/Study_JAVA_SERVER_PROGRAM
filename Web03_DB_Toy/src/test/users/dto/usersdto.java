@@ -1,6 +1,6 @@
 package test.users.dto;
 
-public class UsersDto {
+public class usersdto {
 
 	private String id;
 	private String pwd;
@@ -17,8 +17,8 @@ public class UsersDto {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public UsersDto() {}
-	public UsersDto(String id, String pwd) {
+	public usersdto() {}
+	public usersdto(String id, String pwd) {
 		this.id = id;
 		this.pwd = pwd;
 	}

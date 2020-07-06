@@ -131,7 +131,7 @@ public class TodoDao {
 			while(rs.next()) {
 				TodoDto dto = new TodoDto();
 				dto.setNum(rs.getInt("num"));
-				dto.setWork(rs.getString("work"));
+				dto.setContent(rs.getString("work"));
 				dto.setRegdate(rs.getString("regdate"));
 				list.add(dto);
 			}

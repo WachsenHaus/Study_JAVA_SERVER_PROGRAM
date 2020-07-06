@@ -17,17 +17,20 @@
 	//회원 목록 얻어오기
 	List<MemberDto> list=dao.getList();
 %>
+<div class="navbar navbar-expand-sm navbar-dark bg-info">
+	<a class="navbar-brand" href="${pageContext.request.contextPath }/">Acorn</a>
+
+	<ul class="navbar-nav">
+		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/member/list.jsp">Member</a></li>
+		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/todo/list.jsp">Todo</a></li>
+		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/board/list.jsp">게시판</a></li>
+	</ul>
+</div>
 <div class="container">
-	<div class="navbar navbar-expand-sm navbar-dark bg-primary">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }/">Acorn</a>
-
-		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link active" href="${pageContext.request.contextPath }/member/list.jsp">Member</a></li>
-			<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/todo/list.jsp">Todo</a></li>
-		</ul>
-
-	</div>
-
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
+		<li class="breadcrumb-item active">회원목록</li>
+	</ol>
 	<h1>회원 목록입니다.</h1>
 	<table class="table table-sm">
 		<thead class="thead-dark">
@@ -35,8 +38,8 @@
 				<th>번호</th>
 				<th>이름</th>
 				<th>주소</th>
-				<th> </th>
-				<th> </th>
+				<th>수정</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -51,8 +54,7 @@
 		<%} %>	
 		</tbody>
 	</table>
-	
-	<a href="insertform.jsp">회원추가하러가기</a>
+	<a href="insertform.jsp">회원 추가 하러 가기</a>
 </div>
 </body>
 </html>

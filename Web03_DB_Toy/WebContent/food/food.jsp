@@ -1,14 +1,14 @@
-<%@page import="test.food.dto.FoodDto"%> <%@page import="java.util.List"%> <%@page import="java.util.ArrayList"%> <%@page import="test.food.dao.FoodDao"%>
-<%@page import="test.users.dao.UsersDao"%> <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 
-request.setCharacterEncoding("utf-8");
-UsersDao dao =UsersDao.getInstance(); 
+<%@page import="test.food.dto.fooddto"%> <%@page import="java.util.List"%> <%@page import="java.util.ArrayList"%> <%@page import="test.food.dao.fooddao"%>
+<%@page import="test.users.dao.usersdao"%> <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+usersdao dao =usersdao.getInstance(); 
 String currentId = dao.getId(); 
-FoodDao fDao = FoodDao.getInstance(); //현재 푸드dao를로그인된놈으로 셋팅해준다.
+fooddao fDao = fooddao.getInstance(); //현재 푸드dao를로그인된놈으로 셋팅해준다.
 fDao.setId(currentId);
 
 boolean isSucc = false; 
-List<FoodDto> list = fDao.getList(); 
+List<fooddto> list = fDao.getList(); 
 if(list != null) { isSucc = true; }
 
 String getClickCard = request.getParameter("Num");
@@ -25,7 +25,7 @@ int pickNum = 0;
 boolean isModdal = false;
 if(getClickCard != null){
 	pickNum =Integer.parseInt(getClickCard);
-	FoodDto dto = fDao.select(pickNum);
+	fooddto dto = fDao.select(pickNum);
 	if(dto != null){
 		name = dto.getName();
 		addr = dto.getAddr();
@@ -60,15 +60,19 @@ if(getClickCard != null){
         </div>
       </div>
       <!-- 모달을 선택했다면 모달을 바로 보여줌. -->
-      <%if(isModdal){ %>
-      <% { System.out.println(isModdal);%>
+      <%
+      	if(isModdal){
+      %>
+      <%
+      	{ System.out.println(isModdal);
+      %>
     	   <div id="clickModal" class="pickModal">
 	        <div class="modal-content">
 	          <span class="clickClose">x</span>
 	          <div class="container">
 	            <div class="container__inner">
 	              <form action="modifyInfo.jsp" method="post">
-	              	<input type="hidden" name="num" value="<%=pickNum %>"/>
+	              	<input type="hidden" name="num" value="<%=pickNum%>"/>
 	                <div class="container__inner__row">
 	                  <label for="name">식당이름</label>
 	                  <input required type="text" name="name" id="name" value="<%=name%>"/>
@@ -91,7 +95,7 @@ if(getClickCard != null){
 	                </div>
 	                <div class="container__inner__row">
 	                  <label for="content">내용</label>
-	                  <textarea required name="content" id="content" cols="30" rows="10"><%=content %></textarea>
+	                  <textarea required name="content" id="content" cols="30" rows="10"><%=content%></textarea>
 	                </div>
 	                
 	                <div class="container__inner__row btn">
@@ -101,7 +105,8 @@ if(getClickCard != null){
          	          <button class="sendBtn" type="reset">
 	                    취소하기
 	                  </button>
-	                  <a href="delete.jsp?num=<%=pickNum%>"><i class="fas fa-trash-alt"></i></a>
+	                  <!-- <a href="delete.jsp?num=<%=pickNum%>"><i class="fas fa-trash-alt"></i></a> -->
+	                  <a href="javascript:deleteConfirm(<%=pickNum%>)"><i class="fas fa-trash-alt"></i></a>
 	                </div>
 	                
 	              </form>
@@ -109,8 +114,12 @@ if(getClickCard != null){
 	          </div>
 	        </div>
 	      </div>
-	      <%} %>
-      <%} %>
+	      <%
+	      	}
+	      %>
+      <%
+      	}
+      %>
 
       <div id="myModal" class="modal">
         <div class="modal-content">
@@ -157,8 +166,12 @@ if(getClickCard != null){
      	<input id="selectedCard" type="hidden" name="Num" value=""/>
      </form>
       <div class="food_container">
-        <%if(isSucc) {%> 
-	          <%for(FoodDto tmp : list){ %>
+        <%
+        	if(isSucc) {
+        %> 
+	          <%
+ 	          	for(fooddto tmp : list){
+ 	          %>
 	      		<article class="foodBox">
               		<h1 id="num"><%=tmp.getNum() %></h1>
 	      			<h1 class="menu" ><%=tmp.getMenu() %></h1>
@@ -172,7 +185,12 @@ if(getClickCard != null){
 		<%} %>
       </div>
       <script>
-      
+	  	function deleteConfirm(num){
+			const isDelete = confirm("삭제하겠습니까?");
+			if(isDelete){
+				location.href="delete.jsp?num=" + num;
+			}
+		}
         function foodModal(){
           let modal = document.querySelectorAll(".foodBox");
           modal.forEach( (item,index)=>{
