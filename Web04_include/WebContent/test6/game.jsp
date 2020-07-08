@@ -10,7 +10,7 @@
 <body>
 
 <!--  navbar include -->
-<jsp:include page="../include/navbar.jsp">
+<jsp:include page="../include/navbar2.jsp">
 	<jsp:param value="game" name="thisPage"/>
 </jsp:include>
 

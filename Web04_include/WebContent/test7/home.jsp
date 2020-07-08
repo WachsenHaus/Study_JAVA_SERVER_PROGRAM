@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/test5/home.jsp</title>
+<title>/test6/home.jsp</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
 </head>
 <body>
 	<%--include될 jsp페이지는 반드시 상대경로로 찾아 가야한다. --%>
 	<%--thisPage 라는 파라미터 명으로 home이라는 문자열 전달하기. --%>
-	<jsp:include page="../include/navbar.jsp">
+	<jsp:include page="../include/navbar2.jsp">
 		<jsp:param value="home" name="thisPage"/>
 	</jsp:include>
 	<form action="" method="post"></form>
