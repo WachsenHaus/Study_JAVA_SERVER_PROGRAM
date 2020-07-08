@@ -17,6 +17,7 @@
 	<form action="test/save.jsp" method="post">
 		<input type="text" name="nick" placeholder="닉네임 입력..." />
 		<button type="submit">닉네임 기억 시키기</button>
+		<a href="test/delete.jsp">삭제하기</a>
 	</form>
 </body>
 
