@@ -3,3 +3,10 @@ Servers
 */.settings
 */.project
 .metadata
+Test/.classpath
+Test/.gitignore
+Test/src/test/friend/dao/friendDao.java
+Test/src/test/friend/dto/friendDto.java
+Test/src/test/util/DbcpBean.java
+Test/WebContent/META-INF/MANIFEST.MF
+Test/WebContent/WEB-INF/web.xml
