@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sun.swing.internal.plaf.basic.resources.basic;
+
 import java.util.Date;
 import java.util.Random;
 
@@ -22,6 +26,7 @@ import java.util.Random;
 
 @WebServlet("/sub/fortune")
 public class FortuneServlet extends HttpServlet {
+	
 
 	String[] mFortuneAnalects = {
 			"돈이 들어온답니다.",  
@@ -33,6 +38,8 @@ public class FortuneServlet extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		
 		
 		int getLucckyNum = r.nextInt(mFortuneAnalects.length);
 		
