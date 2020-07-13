@@ -9,7 +9,7 @@ boolean isLogged = (id == null) ? false:true;
 <head>
 <meta charset="UTF-8">
 <title>index.jsp</title>
-<link rel="stylesheet" href="./css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
 </head>
 <body>
 <div class="container">
@@ -19,7 +19,7 @@ boolean isLogged = (id == null) ? false:true;
 		<li><a href="users/signup_form.jsp">회원가입</a></li>
 		<%if(isLogged){ %>
 			<p>
-				<a href="users/info.jsp"><%=id%></a>님 로그인중..
+				<a href="users/private/info.jsp"><%=id%></a>님 로그인중..
 				<li><a href="users/logout.jsp">로그아웃</a></li>
 			</p>		
 		<%}else{ %>

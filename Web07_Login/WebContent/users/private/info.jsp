@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <title>users/info</title>
-<link rel="stylesheet" href="../css/bootstrap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
 </head>
 <body>
 	<%if(isSucc){ %>
