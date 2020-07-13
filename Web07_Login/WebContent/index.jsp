@@ -25,7 +25,7 @@ boolean isLogged = (id == null) ? false:true;
 		<%}else{ %>
 			<li><a href="users/login_form.jsp">로그인</a></li>
 		<%} %>
-		
+		<li><a href="test/buy.jsp?code=111">111번 상품 구입 테스트</a></li>
 	</ul>
 </div>
 </body>

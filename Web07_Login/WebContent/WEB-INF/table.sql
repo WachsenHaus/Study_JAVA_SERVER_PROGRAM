@@ -6,3 +6,9 @@ CREATE TABLE users(
 	profile VARCHAR2(100), -- 프로필 이미지 경로를 저장할 칼럼
 	regdate DATE
 );
+
+
+create table company(
+	num number primary key,
+	
+)

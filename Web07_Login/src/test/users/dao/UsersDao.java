@@ -49,7 +49,7 @@ public class UsersDao {
 		}
 	}
 	
-	public boolean updatePwd(String id, String newPwd)
+	public boolean updatePwd(String id, String newPwd,String oldPwd)
 	{
 		int flag = 0;
 		Connection conn = null;
@@ -58,10 +58,11 @@ public class UsersDao {
 			conn = new DbcpBean().getConn();
 			String sql = "UPDATE users "
 					+ " SET pwd = ? "
-					+ " WHERE id = ?";
+					+ " WHERE id = ? and pwd = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, newPwd);
 			pstmt.setString(2, id);
+			pstmt.setString(3, oldPwd);
 			flag = pstmt.executeUpdate();
 		} catch (Exception e) {
 			flag = 0;

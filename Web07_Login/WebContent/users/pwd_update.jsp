@@ -7,12 +7,12 @@ UsersDao dao = UsersDao.getInstace();
 String id = (String)session.getAttribute("id");
 UsersDto dto = 	dao.getItem(id);
 //1. 기존의 비밀번호를 확인한다.
-String pwd = dto.getPwd();
-String getPwd = request.getParameter("pwd");
-boolean isValid = pwd.equals(getPwd);
-//2. 기존의 비밀번호가 맞으면 수정된 비밀번호를 업데이트한다.
+String oldPwd = request.getParameter("pwd");
 String newPwd = request.getParameter("newPwd");
-boolean isSucc = dao.updatePwd(id, newPwd);
+String newPwd2= request.getParameter("newPwd2");
+boolean isValid = newPwd.equals(newPwd2);
+//2. 기존의 비밀번호가 맞으면 수정된 비밀번호를 업데이트한다.
+boolean isSucc = dao.updatePwd(id, newPwd, oldPwd);
 %>
 <!DOCTYPE html>
 <html>
@@ -27,6 +27,11 @@ boolean isSucc = dao.updatePwd(id, newPwd);
 			alert("비밀번호가 변경되었습니다..");
 			location.href = "${pageContext.request.contextPath}/index.jsp";
 		</script>
+	<%}else{ %>
+		<script>
+			alert("비밀번호가 틀렸습니다.");
+			location.href = "${pageContext.request.contextPath}/index.jsp";
+		</script>
 	<%} %>
 <%}else{ %>
 	<script>
@@ -34,5 +39,6 @@ boolean isSucc = dao.updatePwd(id, newPwd);
 		location.href = "${pageContext.request.contextPath}/index.jsp";
 	</script>
 <%} %>
+
 </body>
 </html>
