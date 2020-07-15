@@ -23,6 +23,7 @@
 			<div class="form-group">
 				<label for="id">아이디</label>
 				<input type="text" name="id" id="id" />
+
 			</div>
 			<div class="form-group">
 				<label for="pwd">비밀번호</label>
@@ -31,7 +32,5 @@
 			<button type="submit">로그인</button>
 		</form>
 	</div>
-	
-	
 </body>
 </html>
