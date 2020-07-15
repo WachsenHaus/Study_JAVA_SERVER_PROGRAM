@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 //@WebFilter("/users/private/*")
 //필터의 주소를 배열방법으로 여러개 추가할 수 있다.
 //@WebFilter({"/users/private/*","추가할주소"})
-@WebFilter({"/users/private/*","/test/*"})
+@WebFilter({"/users/private/*","/test/*","/file/private/*"})
 public class LoginFilter implements Filter {
 
 	@Override
