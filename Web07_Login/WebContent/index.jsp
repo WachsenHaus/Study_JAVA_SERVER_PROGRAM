@@ -30,6 +30,8 @@ boolean isLogged = (id == null) ? false:true;
 		<li><a href="ajax/test02.jsp">ajax테스트2</a></li>
 		<li><a href="ajax/test03.jsp">ajax테스트3</a></li>
 		<li><a href="file/list.jsp">자료실 목록 보기</a></li>
+		<li><a href="gallery/test.jsp">이미지 업로드 테스트</a></li>
+		<li><a href="gallery/test2.jsp">ajax 이미지 업로드 테스트</a></li>
 	</ul>
 </div>
 </body>

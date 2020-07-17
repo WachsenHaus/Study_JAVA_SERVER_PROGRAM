@@ -6,6 +6,8 @@
 <%
 	//파일 목록
 	List<FileDto> list = FileDao.getInstance().getList();
+	//로그인된 아이디 읽어오기
+	String id = (String)session.getAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,11 +35,19 @@
 					<td><%=tmp.getNum() %></td>
 					<td><%=tmp.getWriter() %></td>
 					<td><%=tmp.getTitle() %></td>
-					<td><%=tmp.getOrgFileName() %></td>
+					<td><a href="download.jsp?num=<%=tmp.getNum()%>"><%=tmp.getOrgFileName() %></a></td>
 					<td><%=tmp.getFileSize() %></td>
 					<td><%=tmp.getRegdate() %></td>
+					<td>
+						<%if(tmp.getWriter().equals(id)){ %>
+							<a href="private/delete.jsp?num=<%=tmp.getNum()%>">삭제</a>
+						<%} %>
+					</td>
+					<td>
+						<img src="/Web07_Login/upload/<%=tmp.getSaveFileName()%>" alt="" />
+					</td>
 				</tr>
-			<%} %>
+			<%} %>	
 			</tbody>
 		</table>
 		<a href="private/upload_form.jsp">파일 업로드</a>

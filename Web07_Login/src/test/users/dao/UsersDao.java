@@ -55,18 +55,19 @@ public class UsersDao {
 	}
 	
 	
-	public boolean update(String id, String email) {
+	public boolean update(String id, String email,String profile) {
 		int flag = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
 			conn = new DbcpBean().getConn();
 			String sql = "UPDATE users "
-					+ " SET email = ? " 
+					+ " SET email = ?, profile = ? " 
 					+ " WHERE id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
-			pstmt.setString(2, id);
+			pstmt.setString(2, profile);
+			pstmt.setString(3, id);
 			flag = pstmt.executeUpdate();
 		} catch (Exception e) {
 			flag = 0;
