@@ -1,3 +1,5 @@
+SELECT * FROM board_file ORDER BY num DESC;
+
 CREATE TABLE board_gallery(
 	num NUMBER PRIMARY KEY,
 	writer VARCHAR2(100),
