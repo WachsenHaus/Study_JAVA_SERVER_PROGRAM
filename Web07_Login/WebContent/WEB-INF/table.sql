@@ -1,3 +1,13 @@
+CREATE TABLE board_gallery(
+	num NUMBER PRIMARY KEY,
+	writer VARCHAR2(100),
+	caption VARCHAR2(200),
+	imagePath VARCHAR2(100),
+	regdate DATE
+);
+CREATE SEQUENCE boar_gallery_seq;
+
+
 CREATE TABLE board_file(
 	num NUMBER PRIMARY KEY,
 	writer VARCHAR2(100) NOT NULL,

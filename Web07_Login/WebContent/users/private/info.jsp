@@ -15,6 +15,15 @@
 <meta charset="UTF-8">
 <title>users/info</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css" />
+<style>
+	#profileImage{
+		width:50px;
+		height: 50px;
+		border: 1px solid #cecece;
+		border-radius:50%;
+		cursor: default;
+	}
+</style>
 </head>
 <body>
 	<%if(isSucc){ %>
@@ -33,7 +42,11 @@
 				<td><%=dto.getId() %></td>
 				<td><a href="pwd_update_form.jsp">수정하러가기</a></td>
 				<td><%=dto.getEmail() %></td>
-				<td><%=dto.getProfile() %></td>
+				<td>
+					<a id="profileLink" href="javascript:">
+						<img id="profileImage" src="${pageContext.request.contextPath}<%=dto.getProfile() %>" alt="" />
+					</a>
+				</td>
 				<td><%=dto.getRegdate() %></td>
 			</tr>
 		</tbody>
