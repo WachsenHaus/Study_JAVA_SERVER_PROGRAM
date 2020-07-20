@@ -21,6 +21,40 @@ public class GalleryDao {
 		return dao;
 	}
 	
+	public boolean insert(GalleryDto dto) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = new DbcpBean().getConn();
+			String sql = "insert into board_gallery "
+					+ " (num, writer, caption, imagePath, regdate)" 
+					+ " VALUES(board_gallery_seq.NEXTVAL,? ,? ,?, SYSDATE)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getWriter());
+			pstmt.setString(2, dto.getCaption());
+			pstmt.setString(3, dto.getImagePath());
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			result = 0;
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (result > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	public List<GalleryDto> getList(){
 		List<GalleryDto> list = new ArrayList<GalleryDto>();

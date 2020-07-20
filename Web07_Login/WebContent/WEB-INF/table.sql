@@ -5,7 +5,7 @@ CREATE TABLE board_gallery(
 	imagePath VARCHAR2(100),
 	regdate DATE
 );
-CREATE SEQUENCE boar_gallery_seq;
+CREATE SEQUENCE board_gallery_seq;
 
 
 CREATE TABLE board_file(
