@@ -29,18 +29,143 @@ public class FileDao {
 		try {
 			//Connection 객체의 참조값 얻어오기 
 			conn = new DbcpBean().getConn();
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num "
+					+ " FROM board_file";
+			//실행할 sql 문 준비하기
+			//String sql = "select * from board_file";
+			pstmt = conn.prepareStatement(sql);
+			//sql 문에 ? 에 바인딩할 값이 있으면 바인딩하고 
+			//select 문 수행하고 결과 받아오기 
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 결과 값 추출하기 
+			if (rs.next()) {
+				count = rs.getInt("num");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		
+		return count;
+	}
+	
+	public int getCountTF(FileDto dto) {
+		int count = 0;
+		
+		//필요한 객체의 참조값을 담을 지역변수 만들기 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기 
+			conn = new DbcpBean().getConn();
 			//
 			//rownum 중에서 가장 큰 숫자를 얻어오면 전체 row의 갯수가 된다.
 			//혹시 row가 하나도 없으면 null이 얻어와 지기 때문에 null인 경우 0으로 
 			//바꾼다.
 			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num "
-					+ " FROM board_file";
-			
+					+ " FROM board_file"
+					+ " WHERE title LIKE '%'||?||'%' OR orgFIleNmae LIKE '%'||?||'%'";
 //			실행할 sql 문 준비하기
 //			String sql = "select * from board_file";
 			pstmt = conn.prepareStatement(sql);
 			//sql 문에 ? 에 바인딩할 값이 있으면 바인딩하고 
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getOrgFileName());
 
+			//select 문 수행하고 결과 받아오기 
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 결과 값 추출하기 
+			if (rs.next()) {
+				count = rs.getInt("num");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		
+		return count;
+	}
+	public int getCountT(FileDto dto) {
+		int count = 0;
+		
+		//필요한 객체의 참조값을 담을 지역변수 만들기 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기 
+			conn = new DbcpBean().getConn();
+			//
+			//rownum 중에서 가장 큰 숫자를 얻어오면 전체 row의 갯수가 된다.
+			//혹시 row가 하나도 없으면 null이 얻어와 지기 때문에 null인 경우 0으로 
+			//바꾼다.
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num "
+					+ " FROM board_file"
+					+ " WHERE title LIKE '%'||?||'%'";
+			//실행할 sql 문 준비하기
+			//String sql = "select * from board_file";
+			pstmt = conn.prepareStatement(sql);
+			//sql 문에 ? 에 바인딩할 값이 있으면 바인딩하고 
+			pstmt.setString(1, dto.getTitle());
+			//select 문 수행하고 결과 받아오기 
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 결과 값 추출하기 
+			if (rs.next()) {
+				count = rs.getInt("num");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		
+		return count;
+	}
+	public int getCountW(FileDto dto) {
+		int count = 0;
+		
+		//필요한 객체의 참조값을 담을 지역변수 만들기 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기 
+			conn = new DbcpBean().getConn();
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num "
+					+ " FROM board_file"
+					+ " WHERE writer LIKE '%'||?||'%'";
+			//실행할 sql 문 준비하기
+			//String sql = "select * from board_file";
+			pstmt = conn.prepareStatement(sql);
+			//sql 문에 ? 에 바인딩할 값이 있으면 바인딩하고 
+			pstmt.setString(1, dto.getWriter());
 			//select 문 수행하고 결과 받아오기 
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 결과 값 추출하기 
@@ -144,6 +269,173 @@ public class FileDao {
 		
 	}
 	
+	public List<FileDto> getListW(FileDto dto)
+	{
+		List<FileDto> list = new ArrayList<FileDto>();
+		//필요한 객체의 참조값을 담을 지역변수 만들기 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기 
+			conn = new DbcpBean().getConn();
+			//실행할 sql 문 준비하기
+			String sql = " "
+					+ "SELECT * FROM "
+					+ "(SELECT result1.*, ROWNUM as rnum"
+					+ "	FROM ( SELECT num,writer,title,orgFileName, fileSize,regdate "
+					+ "			FROM board_file" 
+					+ "			WHERE writer LIKE '%'||?||'%' "
+					+ "			ORDER BY num DESC ) result1)"
+					+ " WHERE rnum BETWEEN ? AND ? ";
+			pstmt = conn.prepareStatement(sql);
+			//sql 문에 ? 에 바인딩할 값이 있으면 바인딩하고 
+			pstmt.setString(1, dto.getWriter());
+			pstmt.setInt(2, dto.getStartRowNum());
+			pstmt.setInt(3, dto.getEndRowNum());
+			//select 문 수행하고 결과 받아오기 
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 결과 값 추출하기 
+			while (rs.next()) {
+				FileDto tmp = new FileDto();
+				tmp.setNum(rs.getInt("num"));
+				tmp.setWriter(rs.getString("writer"));
+				tmp.setTitle(rs.getString("title"));
+				tmp.setOrgFileName(rs.getString("orgFileName"));
+				tmp.setFileSize(rs.getLong("fileSize"));
+				tmp.setRegdate(rs.getString("regdate"));
+				list.add(tmp);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return list;
+	}
+	
+	public List<FileDto> getListT(FileDto dto){
+		List<FileDto> list = new ArrayList<FileDto>();
+		//필요한 객체의 참조값을 담을 지역변수 만들기 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기 
+			conn = new DbcpBean().getConn();
+			//실행할 sql 문 준비하기
+			String sql = " "
+					+ "SELECT * FROM "
+					+ "(SELECT result1.*, ROWNUM as rnum"
+					+ "	FROM ( SELECT num,writer,title,orgFileName, fileSize,regdate "
+					+ "			FROM board_file" 
+					+ "			WHERE title LIKE '%'||?||'%' "
+					+ "			ORDER BY num DESC ) result1)"
+					+ " WHERE rnum BETWEEN ? AND ? ";
+			pstmt = conn.prepareStatement(sql);
+			//sql 문에 ? 에 바인딩할 값이 있으면 바인딩하고 
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setInt(2, dto.getStartRowNum());
+			pstmt.setInt(3, dto.getEndRowNum());
+			//select 문 수행하고 결과 받아오기 
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 결과 값 추출하기 
+			while (rs.next()) {
+				FileDto tmp = new FileDto();
+				tmp.setNum(rs.getInt("num"));
+				tmp.setWriter(rs.getString("writer"));
+				tmp.setTitle(rs.getString("title"));
+				tmp.setOrgFileName(rs.getString("orgFileName"));
+				tmp.setFileSize(rs.getLong("fileSize"));
+				tmp.setRegdate(rs.getString("regdate"));
+				list.add(tmp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return list;
+	}
+	
+	public List<FileDto> getListTF(FileDto dto){
+		//필요한 객체의 참조값을 담을 지역변수 만들기 
+		List<FileDto> list = new ArrayList<FileDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기 
+			conn = new DbcpBean().getConn();
+			//실행할 sql 문 준비하기
+			String sql = " "
+					+ "SELECT * FROM "
+					+ "(SELECT result1.*, ROWNUM as rnum"
+					+ "	FROM ( SELECT num,writer,title,orgFileName, fileSize,regdate "
+					+ "			FROM board_file" 
+					+ "			WHERE title LIKE '%'||?||'%' OR orgFileName LIKE '%'||?||'%'"
+					+ "			ORDER BY num DESC ) result1)"
+					+ " WHERE rnum BETWEEN ? AND ? ";
+			
+			String sql = "SELECT *"
+					+ " FROM"
+					+ "     (SELECT result1.*, ROWNUM AS rnum"
+					+ "      FROM (SELECT num,writer,title,orgFileName,fileSize,regdate"
+					+ "            FROM board_file"
+					+ "            WHERE title LIKE '%'||?||'%' OR orgFileName LIKE '%'||?||'%'"
+					+ "            ORDER BY num DESC) result1)"
+					+ " WHERE rnum BETWEEN ? AND ?";
+			pstmt = conn.prepareStatement(sql);
+			//sql 문에 ? 에 바인딩할 값이 있으면 바인딩하고 
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getOrgFileName());
+			pstmt.setInt(3, dto.getStartRowNum());
+			pstmt.setInt(4, dto.getEndRowNum());
+			//select 문 수행하고 결과 받아오기 
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 결과 값 추출하기 
+			while (rs.next()) {
+				FileDto tmp = new FileDto();
+				tmp.setNum(rs.getInt("num"));
+				tmp.setWriter(rs.getString("writer"));
+				tmp.setTitle(rs.getString("title"));
+				tmp.setOrgFileName(rs.getString("orgFileName"));
+				tmp.setFileSize(rs.getLong("fileSize"));
+				tmp.setRegdate(rs.getString("regdate"));
+				list.add(tmp);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return list;
+	}
 	public List<FileDto> getList(FileDto dto){
 		List<FileDto> list = new ArrayList<FileDto>();
 		
@@ -155,8 +447,7 @@ public class FileDao {
 			//Connection 객체의 참조값 얻어오기 
 			conn = new DbcpBean().getConn();
 			//실행할 sql 문 준비하기
-			String sql = "SELECT * "
-					+ " FROM"
+			String sql = "SELECT * FROM"
 					+ " (SELECT result1.*, ROWNUM as rnum"
 					+ " FROM ( SELECT num,writer,title,orgFileName, fileSize,regdate"
 					+ " 	FROM board_file"

@@ -1,3 +1,15 @@
+SELECT * FROM (SELECT result1.*, ROWNUM as rnum
+	FROM ( SELECT num,writer,title,orgFileName, fileSize,regdate FROM board_file
+		   WHERE title LIKE '%' || ? || '%' OR content LIKE '%' || ? || '%'
+		   ORDER BY num DESC ) result1)
+		--Like '%안녕%' 안녕이 포함,
+		--Like '안녕%' 안녕으로 시작,
+		--Like 안녕으로 검색한다.
+		--Like '%' || '안녕' || '%'
+		--Like 작성자 검사냐 내용검사냐
+WHERE rnum BETWEEN ? and ?
+
+
 SELECT * FROM board_file ORDER BY num DESC;
 
 CREATE TABLE board_gallery(
