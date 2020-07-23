@@ -1,3 +1,29 @@
+SELECT NUM,WRITER,TITLE,
+--lead는 다음 번호를 가져온다. prev는 최신글을 의미한다.
+--글은 앞에다 붙이기 떄문?
+LEAD(num,1,0) OVER (ORDER BY num DESC) AS prevNum 
+FROM BOARD_CAFE
+ORDER BY NUM DESC;
+
+SELECT NUM,WRITER,TITLE,
+LEAD(num,1,0) OVER (ORDER BY num DESC) AS prevNum,
+LAG(num,1,0) OVER (ORDER BY num DESC) AS nextNum,
+FROM BOARD_CAFE
+ORDER BY NUM DESC;
+
+
+
+CREATE TABLE board_cafe(
+	num NUMBER PRIMARY KEY,
+	writer VARCHAR2(100) NOT NULL,
+	title VARCHAR2(100) NOT NULL,
+	content CLOB,
+	viewCount NUMBER, --조회수
+	regdate DATE
+);
+
+create SEQUENCE board_cafe_seq;
+
 SELECT * FROM (SELECT result1.*, ROWNUM as rnum
 	FROM ( SELECT num,writer,title,orgFileName, fileSize,regdate FROM board_file
 		   WHERE title LIKE '%' || ? || '%' OR content LIKE '%' || ? || '%'

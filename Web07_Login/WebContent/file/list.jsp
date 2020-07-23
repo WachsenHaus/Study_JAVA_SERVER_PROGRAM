@@ -35,6 +35,7 @@
 	if(keyword == null)
 	{
 		keyword = "";
+		System.out.println(keyword);
 	}
 	//인코딩된 키워드를 미리 만들어 둔다.
 	try{
@@ -42,7 +43,7 @@
 	}
 	catch(Exception ex){
 	}
-
+	System.out.println(keyword);
 	
 	//검색 키워드와 startRowNum, endRowNum을 담을 FileDto 개체 생성
 	FileDto dto = new FileDto();
@@ -52,6 +53,7 @@
 	List<FileDto> list = null;
 	int totalRow=0;
 	if(keyword != ""){ //만일 키워드가 넘어온다면
+		
 		if(condition.equals("title_filename")){
 			dto.setTitle(keyword);
 			dto.setOrgFileName(keyword);
@@ -178,10 +180,11 @@
 		
 		<form action="list.jsp" method="get">
 			<label for="condition">검색조건</label>
+			
 			<select name="condition" id="condition">
-				<option value="title_filename" selected=<%if(condition.equals("title_filename")){ %>selected<%} %>>제목+파일명</option>
-				<option value="title" selected=<%if(condition.equals("title")){ %>selected<%} %>>제목</option>
-				<option value="writer" selected=<%if(condition.equals("writer")){ %>selected<%} %>>작성자</option>
+				<option value="title_filename" <%if(condition.equals("title_filename")){ %>selected="selected"<%}%>>제목+파일명</option>
+				<option value="title" <%if(condition.equals("title")){ %>selected="selected"<%}%>>제목</option>
+				<option value="writer" <%if(condition.equals("writer")){ %>selected="selected"<%}%>>작성자</option>
 			</select>
 			<input type="text" name="keyword" 
 			<%if(keyword !=""){ %>

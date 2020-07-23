@@ -74,7 +74,7 @@ public class FileDao {
 			//바꾼다.
 			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num "
 					+ " FROM board_file"
-					+ " WHERE title LIKE '%'||?||'%' OR orgFIleNmae LIKE '%'||?||'%'";
+					+ " WHERE title LIKE '%'||?||'%' OR orgfilename LIKE '%'||?||'%'";
 //			실행할 sql 문 준비하기
 //			String sql = "select * from board_file";
 			pstmt = conn.prepareStatement(sql);
@@ -393,15 +393,6 @@ public class FileDao {
 					+ "			WHERE title LIKE '%'||?||'%' OR orgFileName LIKE '%'||?||'%'"
 					+ "			ORDER BY num DESC ) result1)"
 					+ " WHERE rnum BETWEEN ? AND ? ";
-			
-			String sql = "SELECT *"
-					+ " FROM"
-					+ "     (SELECT result1.*, ROWNUM AS rnum"
-					+ "      FROM (SELECT num,writer,title,orgFileName,fileSize,regdate"
-					+ "            FROM board_file"
-					+ "            WHERE title LIKE '%'||?||'%' OR orgFileName LIKE '%'||?||'%'"
-					+ "            ORDER BY num DESC) result1)"
-					+ " WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
 			//sql 문에 ? 에 바인딩할 값이 있으면 바인딩하고 
 			pstmt.setString(1, dto.getTitle());
