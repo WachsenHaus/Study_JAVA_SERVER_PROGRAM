@@ -7,7 +7,24 @@ public class GalleryDto {
 	private String caption;
 	private String imagePath;
 	private String regdate;
-	
+	private int startRowNum;
+	private int endRowNum;
+	public int getStartRowNum() {
+		return startRowNum;
+	}
+
+	public void setStartRowNum(int startRowNum) {
+		this.startRowNum = startRowNum;
+	}
+
+	public int getEndRowNum() {
+		return endRowNum;
+	}
+
+	public void setEndRowNum(int endRowNum) {
+		this.endRowNum = endRowNum;
+	}
+
 	public GalleryDto() {}
 
 	public int getNum() {
