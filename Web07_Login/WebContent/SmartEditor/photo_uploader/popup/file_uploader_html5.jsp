@@ -6,10 +6,12 @@
 <%@page import="java.text.SimpleDateFormat"%>
  
 <%
-    //파일정보
+System.out.println("도랏냐");    
+//파일정보
     String sFileInfo = "";
     //파일명을 받는다 - 일반 원본파일명
     String filename = request.getHeader("file-name");
+    System.out.println(filename);
     //파일 확장자
     String filename_ext = filename.substring(filename.lastIndexOf(".") + 1);
     //확장자를소문자로 변경
@@ -33,6 +35,7 @@
         //이미지이므로 신규 파일로 디렉토리 설정 및 업로드   
         //파일 기본경로
         String dftFilePath = request.getSession().getServletContext().getRealPath("/upload");
+        System.out.println(dftFilePath);
         //파일 기본경로 _ 상세경로
         String filePath = dftFilePath + File.separator;
         File file = new File(filePath);

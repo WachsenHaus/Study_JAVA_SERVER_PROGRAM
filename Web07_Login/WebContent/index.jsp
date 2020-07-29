@@ -35,6 +35,16 @@ boolean isLogged = (id == null) ? false:true;
 		<li><a href="gallery/list.jsp">이미지 갤러리</a></li>
 		<li><a href="test/editor.jsp">Smarteditor 테스트</a></li>
 		<li><a href="cafe/list.jsp">카페 글 목록 보기</a></li>
+		<li><a href="test/scroll.jsp">스크롤 테스트</a></li>
+		<li><a href="test/cookie_form.jsp">쿠키 테스트1</a></li>
+		<li><a href="test/cookie_form2.jsp">쿠키 테스트2</a></li>
+		<li><a href="test/cookie_form3.jsp">쿠키 테스트3</a></li>
+		<li><a href="test/popup.jsp">팝업 test1</a></li>
+		<li><a href="test/popup2.jsp">팝업 test2</a></li>
+		<li><a href="test/el_test1.jsp">el test1</a></li>
+		<li><a href="test/el_test2.jsp">el test2</a></li>
+		<li><a href="test/el_test3.jsp">el test3</a></li>
+		<li><a href="test/jstl_test.jsp">jstl test1</a></li>
 		
 	</ul>
 </div>
