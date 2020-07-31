@@ -45,6 +45,7 @@ boolean isLogged = (id == null) ? false:true;
 		<li><a href="test/el_test2.jsp">el test2</a></li>
 		<li><a href="test/el_test3.jsp">el test3</a></li>
 		<li><a href="test/jstl_test.jsp">jstl test1</a></li>
+		<li><a href="test/regular_ex.jsp">정규 표현식	</a></li>
 		
 	</ul>
 </div>

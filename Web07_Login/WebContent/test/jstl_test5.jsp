@@ -17,7 +17,7 @@
 <h1>숫자 포맷을 도와주는 fmt 사용하기</h1>
 
 <p>
-	파일의 크기는 <fmt:formatNumber value="123456789" pattern="#,###"/> byte입니다.
+	파일의 크기는 <fmt:formatNumber value="123456789" pattern="#,###"/>byte입니다.
 </p>
 
 <p>
@@ -32,7 +32,16 @@
 	가격은 <fmt:formatNumber value="${price }" type="currency"/>price입니다.
 </p>
 
+<p>
+	가격은 <fmt:formatNumber value="${price }" type="currency" currencySymbol="$"/>price입니다.
+</p>
 
+<form action="jstl_test6.jsp" method="post">
+	<textarea name="content" id="" cols="30" rows="10"></textarea>
+	<button type="submit">
+	제출하기
+	</button>
+</form>
 
 
 </body>
