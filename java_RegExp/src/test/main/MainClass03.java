@@ -1,14 +1,30 @@
 package test.main;
 
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MainClass03 {
 	public static void main(String[] args) {
-		String str = "i_am_gura";
-		//.split(분리 시킬 정규 표현식 패턴? 이건 그냥 문자열 기능아닌가 ); 
-		String[] result = str.split("_");
+		Scanner scan = new Scanner(System.in);
+		System.out.println("특수 문자를 제외한 5~10글자를 입력하세요:");
+		String str = scan.nextLine();
+		String reg = "^[a-zA-Z0-9]{5,10}$";
+		String reg2 = "^[\\w]{5,10}";
 		
-		for(String tmp:result) {
-			System.out.println(tmp);
-		}
+		boolean result = str.matches(reg);
+		boolean result2 = str.matches(reg2);
 		
+		
+		
+		
+		//패턴은 결과를 다 찾아내고자 할때 사용한다. 
+		//정규 표현식을 compile 한 Pattern 개체 얻어내기
+		Pattern p = Pattern.compile(reg);
+		//Pattern 객체에 검증할 문자열을 전달해서 Matchar 개체 얻어내기
+		Matcher m = p.matcher(str);
+		//찾아지는 문자열이 있는지 boolean type으로 얻어내기
+		boolean result3 = m.find();
+		System.out.println(result + "|" + result2 + "|" + result3);
 	}
 }
