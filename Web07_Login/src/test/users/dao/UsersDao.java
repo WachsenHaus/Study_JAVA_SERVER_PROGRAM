@@ -15,7 +15,6 @@ public class UsersDao {
 		if(dao == null) dao = new UsersDao();
 		return dao;
 	}
-	
 	public boolean isExist(String inputId)
 	{
 		boolean isSuccess = false;
