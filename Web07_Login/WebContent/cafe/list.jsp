@@ -2,9 +2,7 @@
 <%@page import="test.cafe.dto.CafeDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>  
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+    pageEncoding="UTF-8"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,21 +66,10 @@
 	CafeDto dto=new CafeDto();
 	dto.setStartRowNum(startRowNum);
 	dto.setEndRowNum(endRowNum);
+	
 	//1. DB 에서 글 목록을 얻어온다.
 	List<CafeDto> list=CafeDao.getInstance().getList(dto);
 	//2. 글 목록을 응답한다.
-	
-	
-	request.setAttribute("list", list);
-	request.setAttribute("startPageNum", list);
-	request.setAttribute("endPageNum", list);
-	request.setAttribute("pageNum", list);
-	request.setAttribute("totalPageCount", list);
-	request.setAttribute("condition", list);
-	request.setAttribute("keyword", list);
-	request.setAttribute("encodedK", list);
-	
-	
 %>
 <div class="container">
 	<a href="private/insertform.jsp">새글 작성</a>
@@ -98,22 +85,6 @@
 			</tr>
 		</thead>
 		<tbody>
-		<c:forEach var="tmp" items="${list }">
-			<tr>
-				<td>${tmp.num }</td>
-				<td>${tmp.writer }</td>
-				<td>${tmp.title }</td>
-				<td><a href="download.jsp?num=${tmp.num }">${tmp.orgFileName }</a></td>
-				<td><fmt:formatNumber value="${tmp.fileSize }" pattern="#,###" >byte</fmt:formatNumber></td>
-				<td>${tmp.regdate }</td>
-				<td>
-					<c:if test="${tmp.writer eq id }">
-						<a href="private/delete.jsp?num=${tmp.num }">삭제</a>
-					</c:if>
-				</td>
-			</tr>
-		</c:forEach>
-		
 		<%for(CafeDto tmp:list){ %>
 			<tr>
 				<td><%=tmp.getNum() %></td>
@@ -130,7 +101,7 @@
 		</tbody>
 	</table>
 	<div class="page-display">
-		<ul class="pagination pagination-sm">
+		<ul>
 			<%if(startPageNum != 1){ %>
 				<li>
 					<a href="list.jsp?pageNum=<%=startPageNum-1 %>">&laquo;</a>

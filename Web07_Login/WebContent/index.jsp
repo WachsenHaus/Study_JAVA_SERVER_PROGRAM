@@ -48,6 +48,8 @@ boolean isLogged = (id == null) ? false:true;
 		<li><a href="test/regular_ex.jsp">정규 표현식</a></li>
 		<li><a href="fortune">오늘의운세[MVC 테스트]</a></li>
 		<li><a href="todo">오늘의운세[MVC 테스트]</a></li>
+		<li><a href="file">파일 정보보기[MVC 테스트]</a></li>
+		<li><a href="file_list">파일 목록보기[MVC 테스트]</a></li>
 				
 	</ul>
 </div>
