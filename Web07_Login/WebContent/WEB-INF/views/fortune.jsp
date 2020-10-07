@@ -11,4 +11,7 @@
 <p>오늘의 운세 : <strong>${fortuneToday }</strong></p>
 <p>오늘의 운세 : <strong>${fortuneToday }</strong></p>
 </body>
+<script>
+console.log("asd");
+</script>
 </html>

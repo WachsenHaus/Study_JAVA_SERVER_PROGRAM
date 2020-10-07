@@ -11,6 +11,31 @@ public class CafeDto {
 	private int endRowNum;
 	private int prevNum;
 	private int nextNum;
+	
+	
+	
+	
+	public CafeDto() {
+
+	}
+	
+	
+	public CafeDto(int num, String writer, String title, String content, int viewCount, String regdate, int startRowNum,
+			int endRowNum, int prevNum, int nextNum) {
+		super();
+		this.num = num;
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+		this.viewCount = viewCount;
+		this.regdate = regdate;
+		this.startRowNum = startRowNum;
+		this.endRowNum = endRowNum;
+		this.prevNum = prevNum;
+		this.nextNum = nextNum;
+	}
+
+
 	public int getPrevNum() {
 		return prevNum;
 	}
@@ -23,20 +48,7 @@ public class CafeDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-	//디폴트 생성자
-	public CafeDto() {}
-	public CafeDto(int num, String writer, String title, String content, int viewCount, String regdate, int startRowNum,
-			int endRowNum) {
-		super();
-		this.num = num;
-		this.writer = writer;
-		this.title = title;
-		this.content = content;
-		this.viewCount = viewCount;
-		this.regdate = regdate;
-		this.startRowNum = startRowNum;
-		this.endRowNum = endRowNum;
-	}
+	
 	public int getNum() {
 		return num;
 	}
