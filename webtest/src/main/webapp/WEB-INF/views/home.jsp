@@ -19,5 +19,6 @@
 			<li>${tmp }</li>
 		</c:forEach>
 	</ul>
+	<a href="member/list">asd</a>
 </body>
 </html>
